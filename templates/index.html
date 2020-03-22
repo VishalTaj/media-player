@@ -1,0 +1,10 @@
+<head>
+</head>
+
+<body>
+  <ul>
+    {% for file in files %}
+      <li><a href="{{ url_for('media', filename=file) }}">{{ file }}</a></li>
+    {% endfor %}
+  </ul>
+</body>
