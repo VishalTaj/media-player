@@ -1,10 +1,10 @@
-<head>
-</head>
+  
+{% extends 'layout.html' %}
 
-<body>
-  <ul>
+{% block body %}
+  <ul class="media-list">
     {% for file in files %}
       <li><a href="{{ url_for('media', filename=file) }}">{{ file }}</a></li>
     {% endfor %}
   </ul>
-</body>
+{% endblock %}

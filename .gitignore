@@ -1,2 +1,5 @@
-/medias
+/medias/*
+!/medias/.keep
 *.pyc
+
+.env

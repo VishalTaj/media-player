@@ -1,0 +1,95 @@
+:root {
+    --primary-color: #fff;
+    --primary-text-color: #252525;
+    --header-lh: 40px;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i|Playfair+Display:400,400i,700,700i');
+
+body, html {margin: 0;padding: 0;}
+body {
+    font-family: 'Lato';
+    font-size: 16px;
+    line-height: 1.2;
+    background: var(--primary-color);
+}
+
+.container {
+    width: 960px;
+    max-width: 98%;
+    margin: 0 auto;
+}
+
+header {
+    background: var(--primary-color);
+    padding: 5px 0;
+    height: var(--header-lh);
+    box-shadow: 0 3px 7px -2px rgba(0,0,0,.5);
+}
+
+header .logo {
+    float: left;
+}
+
+header .logo img {
+    width: 40px;
+} 
+
+header .logo a {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--primary-text-color);
+}
+
+header .logo span {
+    vertical-align: top;
+    line-height: var(--header-lh);
+    margin-left: 10px;
+    text-transform: uppercase;
+}
+
+ul.media-list {
+    list-style-type: none;
+    padding: 2%;
+    background: #fdfdfd;
+    border-radius: 7px;
+    box-shadow: 0 3px 7px -2px rgba(0,0,0,.5);
+}
+
+ul.media-list li {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+ul.media-list li a {
+    color: var(--primary-text-color);
+    text-decoration: none;
+
+}
+
+.form-container {
+    line-height: var(--header-lh);
+    float: right;
+}
+
+.form-container input[type="text"] {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    outline: none;
+}
+
+.form-container input[type="submit"] {
+    border: none;
+    padding: 3px 10px;
+    border: 1px solid #ddd;
+    background: #8249c1;
+    border-radius: 5px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.video-player {
+    padding-top: 20px;
+    height: 400px;
+    color: #a5a5a5;
+}

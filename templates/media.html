@@ -1,4 +1,6 @@
-<head>
+{% extends 'layout.html' %}
+
+{% block head %}
   <link href="https://vjs.zencdn.net/7.6.6/video-js.css" rel="stylesheet" />
 
   <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
@@ -10,29 +12,33 @@
       height: 100%;
     }
   </style>
-</head>
+{% endblock %}
 
-<body>
-  <video
-    id="my-video"
-    class="video-js"
-    controls
-    preload="auto"
-    width="100%"
-    height="100%"
-    poster="MY_VIDEO_POSTER.jpg"
-    data-setup="{}"
-  >
-    <source src="{{ url_for('get_media', filename=filename) }}" type="video/mp4" />
-    <source src="MY_VIDEO.webm" type="video/webm" />
-    <p class="vjs-no-js">
-      To view this video please enable JavaScript, and consider upgrading to a
-      web browser that
-      <a href="https://videojs.com/html5-video-support/" target="_blank"
-        >supports HTML5 video</a
-      >
-    </p>
-  </video>
+{% block body %}
+  <div class="video-player">
+    <video
+      id="my-video"
+      class="video-js"
+      controls
+      preload="auto"
+      width="100%"
+      height="100%"
+      poster="MY_VIDEO_POSTER.jpg"
+      data-setup="{}"
+    >
+      <source src="{{ url_for('media_url', filename=filename) }}" type="video/mp4" />
+      <source src="MY_VIDEO.webm" type="video/webm" />
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a
+        web browser that
+        <a href="https://videojs.com/html5-video-support/" target="_blank"
+          >supports HTML5 video</a
+        >
+      </p>
+    </video>
+
+    <p>{{ filename }}</p>
+  </div>
 
   <script src="https://vjs.zencdn.net/7.6.6/video.js"></script>
-</body>
+{% endblock %}

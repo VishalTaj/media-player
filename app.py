@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request
 import os
 
 MEDIA_FOLDER = './medias'
@@ -6,9 +6,13 @@ MEDIA_FOLDER = './medias'
 app = Flask(__name__)
 
 app.config['MEDIA_FOLDER'] = MEDIA_FOLDER 
+app.config.from_pyfile('settings.py')
+
 
 @app.route("/")
-def home():
+@app.route("/<search>")
+def home(search=''):
+	search_string = request.args.get('search')
 	abs_path = os.path.join(app.config['MEDIA_FOLDER'])
 	 # Return 404 if path doesn't exist
 	if not os.path.exists(abs_path):
@@ -20,15 +24,23 @@ def home():
 
 	# Show directory contents
 	files = os.listdir(abs_path)
-	return render_template('index.html', files=files)
+
+	if search_string:
+		files = [s for s in files if search_string in s]
+
+	return render_template('index.html', files=files, search=search_string)
 
 @app.route("/media/<filename>")
 def media(filename=None):
 	return render_template('media.html', filename=filename)
 
-@app.route("/get_media/<filename>")
-def get_media(filename):
+@app.route("/media_url/<filename>")
+def media_url(filename):
 	return send_from_directory(app.config['MEDIA_FOLDER'],filename)
 
+@app.route('/service-worker.js')
+def sw():
+	return app.send_static_file('service-worker.js')
+
 if __name__ == "__main__":
-  app.run(host='0.0.0.0', port=80)
+  app.run(debug=True, host='0.0.0.0', port=80)
