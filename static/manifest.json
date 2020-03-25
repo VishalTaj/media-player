@@ -1,9 +1,14 @@
 {
     "name": "NAS Media Player",
     "short_name": "NAS Player",
-    "theme_color": "#34A5DA",
+    "theme_color": "#1d9292",
     "background_color": "#FFFFFF",
     "icons": [
+    	{
+          "src": "/static/images/logo-48x48.png",
+          "type": "image/png",
+          "sizes": "48x48"
+        },
         {
           "src": "/static/images/logo-72x72.png",
           "type": "image/png",
