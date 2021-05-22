@@ -1,0 +1,13 @@
+  
+{% extends 'layout.html' %}
+
+{% block body %}
+  <ul class="media-list">
+    {% for file in files %}
+      {% set file_details = file.lower().split('.') %}
+      {% if file_details[-1] in ['avi', 'mp4', 'mkv', 'flv'] %}
+        <li><a href="{{ url_for('media', filename=file) }}">{{ file }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endblock %}

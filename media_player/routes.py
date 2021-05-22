@@ -1,13 +1,9 @@
+from flask import current_app as app
 from flask import Flask, render_template, send_from_directory, request
 import os
 
 MEDIA_FOLDER = './medias'
-
-app = Flask(__name__)
-
-app.config['MEDIA_FOLDER'] = MEDIA_FOLDER 
-app.config.from_pyfile('settings.py')
-
+app.config['MEDIA_FOLDER'] = MEDIA_FOLDER
 
 @app.route("/")
 @app.route("/<search>")
@@ -30,10 +26,6 @@ def home(search=''):
 
 	return render_template('index.html', files=files, search=search_string)
 
-@app.route("/media/scanner")
-def scanner():
-  return render_template('media.html')
-
 @app.route("/media/<filename>")
 def media(filename=None):
 	return render_template('media.html', filename=filename)
@@ -45,6 +37,3 @@ def media_url(filename):
 @app.route('/service-worker.js')
 def sw():
 	return app.send_static_file('service-worker.js')
-
-if __name__ == "__main__":
-  app.run(debug=True, host='0.0.0.0', port=80)
