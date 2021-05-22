@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <ul class="media-list">
+    {% for bucket_item in bucket.bucket_items %}
+      <li><a href="{{ url_for('media', filename=bucket_item.source_path) }}">{{ bucket_item.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

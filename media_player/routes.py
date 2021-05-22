@@ -1,12 +1,29 @@
 from flask import current_app as app
 from flask import Flask, render_template, send_from_directory, request
 import os
+from . import models
 
 MEDIA_FOLDER = './medias'
 app.config['MEDIA_FOLDER'] = MEDIA_FOLDER
 
 @app.route("/")
-@app.route("/<search>")
+def libraries():
+  libraries = models.Library.query.all()
+  return render_template('libraries/index.html', libraries=libraries)
+
+@app.route("/libraries/<library_id>")
+def library(library_id):
+  library = models.Library.query.get(int(library_id))
+  return render_template('libraries/show.html', library=library)
+
+@app.route("/buckets/<bucket_id>")
+def bucket(bucket_id):
+  print(bucket_id)
+  bucket = models.Bucket.query.filter_by(slug=bucket_id).first()
+  return render_template('buckets/show.html', bucket=bucket)
+
+# @app.route("/")
+@app.route("/search/")
 def home(search=''):
 	search_string = request.args.get('search')
 	abs_path = os.path.join(app.config['MEDIA_FOLDER'])

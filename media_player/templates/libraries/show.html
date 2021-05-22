@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <ul class="media-list">
+    {% for bucket in library.buckets %}
+      <li><a href="{{ url_for('bucket', bucket_id=bucket.id) }}">{{ bucket.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

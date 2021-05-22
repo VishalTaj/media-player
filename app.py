@@ -1,6 +1,8 @@
 from flask import Flask, render_template, send_from_directory, request
 import os
 
+from media_player import models
+
 MEDIA_FOLDER = './medias'
 
 app = Flask(__name__)
@@ -8,12 +10,16 @@ app = Flask(__name__)
 app.config['MEDIA_FOLDER'] = MEDIA_FOLDER 
 app.config.from_pyfile('settings.py')
 
-
 @app.route("/")
+def libraries():
+  libraries = models.Library.query.all()
+  return render_template('libraries.html', libraries=libraries)
+
 @app.route("/<search>")
 def home(search=''):
 	search_string = request.args.get('search')
 	abs_path = os.path.join(app.config['MEDIA_FOLDER'])
+  libraries = models.Library.query.all()
 	 # Return 404 if path doesn't exist
 	if not os.path.exists(abs_path):
 		return abort(404)
@@ -28,7 +34,8 @@ def home(search=''):
 	if search_string:
 		files = [s for s in files if search_string in s]
 
-	return render_template('index.html', files=files, search=search_string)
+	return render_template('index.html', files=files, search=search_string, libraries=libraries)
+
 
 @app.route("/media/scanner")
 def scanner():

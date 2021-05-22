@@ -1,6 +1,7 @@
 """Data models."""
 
 from . import db
+from datetime import datetime
 
 class Bucket(db.Model):
   """Data Model for Folder"""
@@ -10,8 +11,8 @@ class Bucket(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64), index=False, unique=True, nullable=False)
   slug = db.Column(db.String(64), index=True, unique=True, nullable=False)
-  created = db.Column(db.DateTime, index=False, unique=False, nullable=True)
-  updated = db.Column(db.DateTime, index=False, unique=False, nullable=True)
+  created = db.Column(db.DateTime, index=False, unique=False, nullable=True, default=datetime.now())
+  updated = db.Column(db.DateTime, index=False, unique=False, nullable=True, default=datetime.now())
   library_id = db.Column(
       db.Integer,
       db.ForeignKey('libraries.id', ondelete='CASCADE'),
@@ -32,8 +33,9 @@ class BucketItem(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64), index=False, unique=True, nullable=False)
   slug = db.Column(db.String(64), index=True, unique=True, nullable=False)
-  created = db.Column(db.DateTime, index=False, unique=False, nullable=True)
-  updated = db.Column(db.DateTime, index=False, unique=False, nullable=True)
+  created = db.Column(db.DateTime, index=False, unique=False, nullable=True, default=datetime.now())
+  updated = db.Column(db.DateTime, index=False, unique=False, nullable=True, default=datetime.now())
+  source_path = db.Column(db.String(255), index=False, unique=False, nullable=True)
   bucket_id = db.Column(
         db.Integer,
         db.ForeignKey('buckets.id', ondelete='CASCADE'),
@@ -57,8 +59,8 @@ class Library(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64), index=False, unique=True, nullable=False)
   slug = db.Column(db.String(64), index=True, unique=True, nullable=False)
-  created = db.Column(db.DateTime, index=False, unique=False, nullable=True)
-  updated = db.Column(db.DateTime, index=False, unique=False, nullable=True)
+  created = db.Column(db.DateTime, index=False, unique=False, nullable=True, default=datetime.now())
+  updated = db.Column(db.DateTime, index=False, unique=False, nullable=True, default=datetime.now())
   
   def __repr__(self):
     return '<Library {}>'.format(self.name)
